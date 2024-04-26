@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/main",
+      "program": "/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/main/build/Debug/outDebug"
+    }
+  ]
+}

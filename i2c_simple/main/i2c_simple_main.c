@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include "esp_log.h"
-#include "http_rest_json_client.h"
-#include "http_rest_types.h"
-#include <unistd.h>
-#include "nvs_flash.h"
 #include "esp_log.h"
 #include "driver/i2c.h"
 #include "mpu6050.h"
@@ -42,12 +38,7 @@ static mpu6050_handle_t mpu6050 = NULL;
 #define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
 #define I2C_MASTER_TIMEOUT_MS 1000
 
-#define WIFI_SSID "OP512"
-#define WIFI_PASSWORD "TextShow0030"
-#define MAX_HTTP_RECV_BUFFER 512
-#define MAX_HTTP_OUTPUT_BUFFER 2048
-#define CONFIG_EXAMPLE_HTTP_ENDPOINT "httpbin.org"
-static const char *TAG = "HTTP_CLIENT";
+
 
 static esp_err_t i2c_master_init(void)
 {
@@ -106,39 +97,7 @@ void app_main(void)
         printf("xxx\n");
         sleep(2);
     }
-    // // Declare local_response_buffer with size (MAX_HTTP_OUTPUT_BUFFER + 1) to prevent out of bound access when
-    // // it is used by functions like strlen(). The buffer should only be used upto size MAX_HTTP_OUTPUT_BUFFER
-    // char output_buffer[MAX_HTTP_OUTPUT_BUFFER + 1] = {0};   // Buffer to store response of http request
-    // int content_length = 0;
-    // esp_http_client_config_t config = {
-    //     .url = "http://"CONFIG_EXAMPLE_HTTP_ENDPOINT"/get",
-    // };
-    // esp_http_client_handle_t client = esp_http_client_init(&config);
-
-    // // GET Request
-    // esp_http_client_set_method(client, HTTP_METHOD_GET);
-    // esp_err_t err = esp_http_client_open(client, 0);
-    // if (err != ESP_OK) {
-    //     ESP_LOGE(TAG, "Failed to open HTTP connection: %s", esp_err_to_name(err));
-    // } else {
-    //     content_length = esp_http_client_fetch_headers(client);
-    //     if (content_length < 0) {
-    //         ESP_LOGE(TAG, "HTTP client fetch headers failed");
-    //     } else {
-    //         int data_read = esp_http_client_read_response(client, output_buffer, MAX_HTTP_OUTPUT_BUFFER);
-    //         if (data_read >= 0) {
-    //             ESP_LOGI(TAG, "HTTP GET Status = %d, content_length = %"PRId64,
-    //             esp_http_client_get_status_code(client),
-    //             esp_http_client_get_content_length(client));
-    //             ESP_LOG_BUFFER_HEX(TAG, output_buffer, data_read);
-    //         } else {
-    //             ESP_LOGE(TAG, "Failed to read response");
-    //         }
-    //     }
-    // }
-    // esp_http_client_close(client);
-
-
+    
     mpu6050_delete(mpu6050);
     i2c_driver_delete(I2C_MASTER_NUM);
     ESP_LOGI(TAG, "I2C de-initialized successfully");
