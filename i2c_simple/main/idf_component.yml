@@ -1,5 +1,6 @@
 ## IDF Component Manager Manifest File
 dependencies:
+  espressif/esp-tflite-micro: "*"
   parabuzzle/http_rest_client: "^0.1.4"
   espressif/mpu6050: "^1.1.1"
   ## Required IDF version

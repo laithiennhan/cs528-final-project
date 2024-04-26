@@ -521,6 +521,14 @@ CONFIG_HTTP_REST_CLIENT_USER_AGENT="IDF HTTP REST Client/1.0"
 # end of Example Configuration
 
 #
+# ESP-NN
+#
+# CONFIG_NN_ANSI_C is not set
+CONFIG_NN_OPTIMIZED=y
+CONFIG_NN_OPTIMIZATIONS=1
+# end of ESP-NN
+
+#
 # HTTP REST Client
 #
 # end of HTTP REST Client

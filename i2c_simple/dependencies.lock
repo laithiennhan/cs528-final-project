@@ -1,4 +1,16 @@
 dependencies:
+  espressif/esp-nn:
+    component_hash: b32869798bdb40dec6bc99caca48cd65d42f8a9f506b9ab9c598a076f891ede9
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 1.0.2
+  espressif/esp-tflite-micro:
+    component_hash: ffe40b7edc5f407f82a55047b7269c036c25106ff830fb9b3231f3b7fecb4915
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 1.2.0
   espressif/mpu6050:
     component_hash: d69219ccb141372b863c511749ffbeab28417ac71c205d7ed7030c308e1b6832
     source:
@@ -16,6 +28,6 @@ dependencies:
       service_url: https://api.components.espressif.com/
       type: service
     version: 0.1.4
-manifest_hash: 536c413319ea14456e174e3c54a9b6ed9bb57510402ce539c76322e42bdcb71e
+manifest_hash: 8ef83e1ff3e3b0d06461c26a7404ae5b7addf0dc738f86b0f84163643bfe0264
 target: esp32s3
 version: 1.0.0

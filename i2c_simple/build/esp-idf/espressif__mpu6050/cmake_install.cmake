@@ -1,4 +1,4 @@
-# Install script for directory: /Users/hieunguyen/Desktop/CS528/i2c_simple/managed_components/espressif__mpu6050
+# Install script for directory: /Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/managed_components/espressif__mpu6050
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

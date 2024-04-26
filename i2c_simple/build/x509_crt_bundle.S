@@ -1,4 +1,4 @@
-/* * Data converted from /Users/hieunguyen/Desktop/CS528/i2c_simple/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

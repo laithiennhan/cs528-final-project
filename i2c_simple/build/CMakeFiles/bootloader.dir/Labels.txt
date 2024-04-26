@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/CMakeFiles/bootloader
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/CMakeFiles/bootloader.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/CMakeFiles/bootloader-complete.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/Users/hieunguyen/Desktop/CS528/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/CMakeFiles/bootloader
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/CMakeFiles/bootloader.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/CMakeFiles/bootloader-complete.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

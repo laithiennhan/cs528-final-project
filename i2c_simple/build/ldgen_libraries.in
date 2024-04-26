@@ -63,6 +63,8 @@ $<TARGET_FILE:__idf_spiffs>
 $<TARGET_FILE:__idf_touch_element>
 $<TARGET_FILE:__idf_usb>
 $<TARGET_FILE:__idf_wifi_provisioning>
+$<TARGET_FILE:__idf_espressif__esp-nn>
+$<TARGET_FILE:__idf_espressif__esp-tflite-micro>
 $<TARGET_FILE:__idf_espressif__mpu6050>
 $<TARGET_FILE:__idf_parabuzzle__http_rest_client>
 $<TARGET_FILE:__idf_main>

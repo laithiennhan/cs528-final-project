@@ -1,4 +1,4 @@
-# Install script for directory: /Users/hieunguyen/Desktop/CS528/i2c_simple/managed_components/parabuzzle__http_rest_client
+# Install script for directory: /Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/managed_components/parabuzzle__http_rest_client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

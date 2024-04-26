@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/hieunguyen/Desktop/CS528/i2c_simple/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
-  include("/Users/hieunguyen/Desktop/CS528/i2c_simple/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
-  include("/Users/hieunguyen/Desktop/CS528/i2c_simple/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
+  include("/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
+  include("/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
+  include("/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
 
 endif()
 

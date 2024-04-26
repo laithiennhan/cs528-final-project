@@ -1,13 +1,14 @@
+#include <unistd.h>
 #include <stdio.h>
 #include <inttypes.h>
 #include "esp_log.h"
 #include "driver/i2c.h"
 #include "mpu6050.h"
 #include <time.h>
+#include "inference.h"
 
 
-
-// static const char *TAG = "i2c-simple-example";
+static const char *TAG = "i2c-simple-example";
 static mpu6050_handle_t mpu6050 = NULL;
 
 #define I2C_MASTER_SCL_IO 1         /*!< GPIO number used for I2C master clock */
@@ -56,27 +57,28 @@ void app_main(void)
     mpu6050_get_deviceid(mpu6050, &mpu6050_deviceid);
     printf("Device id: %X\n", mpu6050_deviceid);
 
-    
+    setup();
+    loop();
 
-    for (int i = 0; i < 20; i++)
-    {
-        time_t start_time = time(NULL);
-        while (difftime(time(NULL), start_time) < 4)
-        {
-            mpu6050_acce_value_t acce;
-            mpu6050_gyro_value_t gyro;
+    // for (int i = 0; i < 20; i++)
+    // {
+    //     time_t start_time = time(NULL);
+    //     while (difftime(time(NULL), start_time) < 4)
+    //     {
+    //         mpu6050_acce_value_t acce;
+    //         mpu6050_gyro_value_t gyro;
 
-            mpu6050_get_acce(mpu6050, &acce);
-            mpu6050_get_gyro(mpu6050, &gyro);
+    //         mpu6050_get_acce(mpu6050, &acce);
+    //         mpu6050_get_gyro(mpu6050, &gyro);
             
             
 
-            printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n", acce.acce_x, acce.acce_y, acce.acce_z, gyro.gyro_x, gyro.gyro_y, gyro.gyro_z);
-            sleep(0.5);
-        }
-        printf("xxx\n");
-        sleep(2);
-    }
+    //         printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n", acce.acce_x, acce.acce_y, acce.acce_z, gyro.gyro_x, gyro.gyro_y, gyro.gyro_z);
+    //         sleep(0.5);
+    //     }
+    //     printf("xxx\n");
+    //     sleep(2);
+    // }
     
     mpu6050_delete(mpu6050);
     i2c_driver_delete(I2C_MASTER_NUM);

@@ -6045,6 +6045,54 @@
     {
         "children": [
             {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": "<choice NN_OPTIMIZATIONS>",
+                        "help": "ANSI C versions for verification and debug purposes.",
+                        "id": "NN_ANSI_C",
+                        "name": "NN_ANSI_C",
+                        "range": null,
+                        "title": "ANSI C",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "<choice NN_OPTIMIZATIONS>",
+                        "help": "Optimisations are automatically picked up for a chipset.\nFor ESP32-S3, assembly optimisations are selected.\nFor other platforms(viz., ESP32, ESP32-C3), generic optimisations are used.",
+                        "id": "NN_OPTIMIZED",
+                        "name": "NN_OPTIMIZED",
+                        "range": null,
+                        "title": "Optimized versions",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "help": "Use ANSI-C versions for verification and debug purpose.\nOptimisations are automatically picked up for a chipset.\nFor ESP32-S3, assembly optimisations are selected.\nFor other platforms(viz., ESP32, ESP32-C3), generic optimisations are used.",
+                "id": "esp-nn-optimization-for-nn-functions",
+                "name": "NN_OPTIMIZATIONS",
+                "title": "Optimization for nn functions",
+                "type": "choice"
+            },
+            {
+                "children": [],
+                "depends_on": null,
+                "help": null,
+                "id": "NN_OPTIMIZATIONS",
+                "name": "NN_OPTIMIZATIONS",
+                "range": null,
+                "title": null,
+                "type": "int"
+            }
+        ],
+        "depends_on": null,
+        "id": "esp-nn",
+        "title": "ESP-NN",
+        "type": "menu"
+    },
+    {
+        "children": [
+            {
                 "children": [],
                 "depends_on": null,
                 "help": "This is the User Agent string to be used by the client.",
