@@ -1,0 +1,541 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (33) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (33) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (33) boot: Multicore bootloader[0m
+[0;32mI (36) boot: chip revision: v0.1[0m
+[0;32mI (40) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (45) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (50) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (55) boot: Enabling RNG early entropy source...[0m
+[0;32mI (60) boot: Partition Table:[0m
+[0;32mI (64) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (71) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (78) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (86) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (93) boot: End of partition table[0m
+[0;32mI (98) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (138) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (141) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (158) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m
+[0;32mI (242) esp_image: segment 4: paddr=00095d3c vaddr=40380de0 size=02850h ( 10320) load[0m
+[0;32mI (251) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (251) boot: Disabling RNG early entropy source...[0m
+[0;32mI (263) cpu_start: Multicore app[0m
+[0;32mI (272) cpu_start: Pro cpu start user code[0m
+[0;32mI (272) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (272) cpu_start: Application information:[0m
+[0;32mI (275) cpu_start: Project name:     i2c-simple[0m
+[0;32mI (280) cpu_start: App version:      94e5d27[0m
+[0;32mI (285) cpu_start: Compile time:     Apr 20 2024 16:06:18[0m
+[0;32mI (291) cpu_start: ELF file SHA256:  46de614c5...[0m
+[0;32mI (297) cpu_start: ESP-IDF:          v5.2[0m
+[0;32mI (302) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (306) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (311) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (316) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (323) heap_init: At 3FC978D8 len 00051E38 (327 KiB): RAM[0m
+[0;32mI (329) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (335) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (341) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;33mW (348) spi_flash: Octal flash chip is using but dio mode is selected, will automatically swich to Octal mode[0m
+[0;32mI (358) spi_flash: detected chip: mxic (opi)[0m
+[0;32mI (363) spi_flash: flash io: opi_str[0m
+[0;33mW (367) spi_flash: Detected size(32768k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (381) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (391) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (398) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (406) main_task: Started on CPU0[0m
+[0;32mI (416) main_task: Calling app_main()[0m
+[0;32mI (416) HTTP_CLIENT: I2C initialized successfully[0m
+
+***ERROR*** A stack overflow in task main has been detected.
+
+
+Backtrace: 0x403759fa:0x3fc9aaa0 0x4037ae6d:0x3fc9aac0 0x4037bd32:0x3fc9aae0 0x4037ce97:0x3fc9ab60 0x4037bdf8:0x3fc9ab80 0x4037bdee:0x00000001 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 46de614c5
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375970
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (37) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (38) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (38) boot: Multicore bootloader[0m
+[0;32mI (41) boot: chip revision: v0.1[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (59) boot: Enabling RNG early entropy source...[0m
+[0;32mI (65) boot: Partition Table:[0m
+[0;32mI (68) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (83) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (98) boot: End of partition table[0m
+[0;32mI (102) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (145) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m
+[0;32mI (246) esp_image: segment 4: paddr=00095d3c vaddr=40380de0 size=02850h ( 10320) load[0m
+[0;32mI (256) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (256) boot: Disabling RNG early entropy source...[0m
+[0;32mI (267) cpu_start: Multicore app[0m
+[0;32mI (277) cpu_start: Pro cpu start user code[0m
+[0;32mI (277) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (277) cpu_start: Application information:[0m
+[0;32mI (280) cpu_start: Project name:     i2c-simple[0m
+[0;32mI (285) cpu_start: App version:      94e5d27[0m
+[0;32mI (290) cpu_start: Compile time:     Apr 20 2024 16:06:18[0m
+[0;32mI (296) cpu_start: ELF file SHA256:  46de614c5...[0m
+[0;32mI (301) cpu_start: ESP-IDF:          v5.2[0m
+[0;32mI (306) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (311) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (316) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (320) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (328) heap_init: At 3FC978D8 len 00051E38 (327 KiB): RAM[0m
+[0;32mI (334) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (340) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (346) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;33mW (353) spi_flash: Octal flash chip is using but dio mode is selected, will automatically swich to Octal mode[0m
+[0;32mI (363) spi_flash: detected chip: mxic (opi)[0m
+[0;32mI (368) spi_flash: flash io: opi_str[0m
+[0;33mW (372) spi_flash: Detected size(32768k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (385) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (403) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (410) main_task: Started on CPU0[0m
+[0;32mI (420) main_task: Calling app_main()[0m
+[0;32mI (420) HTTP_CLIENT: I2C initialized successfully[0m
+
+***ERROR*** A stack overflow in task main has been detected.
+
+
+Backtrace: 0x403759fa:0x3fc9aaa0 0x4037ae6d:0x3fc9aac0 0x4037bd32:0x3fc9aae0 0x4037ce97:0x3fc9ab60 0x4037bdf8:0x3fc9ab80 0x4037bdee:0x00000001 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 46de614c5
+
+Rebooting...
+���ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375970
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (37) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (38) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (38) boot: Multicore bootloader[0m
+[0;32mI (41) boot: chip revision: v0.1[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (59) boot: Enabling RNG early entropy source...[0m
+[0;32mI (65) boot: Partition Table:[0m
+[0;32mI (68) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (83) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (98) boot: End of partition table[0m
+[0;32mI (102) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (145) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m
+[0;32mI (246) esp_image: segment 4: paddr=00095d3c vaddr=40380de0 size=02850h ( 10320) load[0m
+[0;32mI (256) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (256) boot: Disabling RNG early entropy source...[0m
+[0;32mI (267) cpu_start: Multicore app[0m
+[0;32mI (277) cpu_start: Pro cpu start user code[0m
+[0;32mI (277) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (277) cpu_start: Application information:[0m
+[0;32mI (280) cpu_start: Project name:     i2c-simple[0m
+[0;32mI (285) cpu_start: App version:      94e5d27[0m
+[0;32mI (290) cpu_start: Compile time:     Apr 20 2024 16:06:18[0m
+[0;32mI (296) cpu_start: ELF file SHA256:  46de614c5...[0m
+[0;32mI (301) cpu_start: ESP-IDF:          v5.2[0m
+[0;32mI (306) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (311) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (316) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (320) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (328) heap_init: At 3FC978D8 len 00051E38 (327 KiB): RAM[0m
+[0;32mI (334) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (340) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (346) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;33mW (353) spi_flash: Octal flash chip is using but dio mode is selected, will automatically swich to Octal mode[0m
+[0;32mI (363) spi_flash: detected chip: mxic (opi)[0m
+[0;32mI (368) spi_flash: flash io: opi_str[0m
+[0;33mW (372) spi_flash: Detected size(32768k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (385) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (403) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (410) main_task: Started on CPU0[0m
+[0;32mI (420) main_task: Calling app_main()[0m
+[0;32mI (420) HTTP_CLIENT: I2C initialized successfully[0m
+
+***ERROR*** A stack overflow in task main has been detected.
+
+
+Backtrace: 0x403759fa:0x3fc9aaa0 0x4037ae6d:0x3fc9aac0 0x4037bd32:0x3fc9aae0 0x4037ce97:0x3fc9ab60 0x4037bdf8:0x3fc9ab80 0x4037bdee:0x00000001 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 46de614c5
+
+Rebooting...
+���ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375970
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (37) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (38) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (38) boot: Multicore bootloader[0m
+[0;32mI (41) boot: chip revision: v0.1[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (59) boot: Enabling RNG early entropy source...[0m
+[0;32mI (65) boot: Partition Table:[0m
+[0;32mI (68) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (83) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (98) boot: End of partition table[0m
+[0;32mI (102) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (145) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m
+[0;32mI (246) esp_image: segment 4: paddr=00095d3c vaddr=40380de0 size=02850h ( 10320) load[0m
+[0;32mI (256) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (256) boot: Disabling RNG early entropy source...[0m
+[0;32mI (267) cpu_start: Multicore app[0m
+[0;32mI (277) cpu_start: Pro cpu start user code[0m
+[0;32mI (277) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (277) cpu_start: Application information:[0m
+[0;32mI (280) cpu_start: Project name:     i2c-simple[0m
+[0;32mI (285) cpu_start: App version:      94e5d27[0m
+[0;32mI (290) cpu_start: Compile time:     Apr 20 2024 16:06:18[0m
+[0;32mI (296) cpu_start: ELF file SHA256:  46de614c5...[0m
+[0;32mI (301) cpu_start: ESP-IDF:          v5.2[0m
+[0;32mI (306) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (311) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (316) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (320) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (328) heap_init: At 3FC978D8 len 00051E38 (327 KiB): RAM[0m
+[0;32mI (334) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (340) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (346) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;33mW (353) spi_flash: Octal flash chip is using but dio mode is selected, will automatically swich to Octal mode[0m
+[0;32mI (363) spi_flash: detected chip: mxic (opi)[0m
+[0;32mI (368) spi_flash: flash io: opi_str[0m
+[0;33mW (372) spi_flash: Detected size(32768k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (385) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (403) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (410) main_task: Started on CPU0[0m
+[0;32mI (420) main_task: Calling app_main()[0m
+[0;32mI (420) HTTP_CLIENT: I2C initialized successfully[0m
+
+***ERROR*** A stack overflow in task main has been detected.
+
+
+Backtrace: 0x403759fa:0x3fc9aaa0 0x4037ae6d:0x3fc9aac0 0x4037bd32:0x3fc9aae0 0x4037ce97:0x3fc9ab60 0x4037bdf8:0x3fc9ab80 0x4037bdee:0x00000001 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 46de614c5
+
+Rebooting...
+���ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375970
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (37) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (38) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (38) boot: Multicore bootloader[0m
+[0;32mI (41) boot: chip revision: v0.1[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (59) boot: Enabling RNG early entropy source...[0m
+[0;32mI (65) boot: Partition Table:[0m
+[0;32mI (68) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (83) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (98) boot: End of partition table[0m
+[0;32mI (102) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (145) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m
+[0;32mI (246) esp_image: segment 4: paddr=00095d3c vaddr=40380de0 size=02850h ( 10320) load[0m
+[0;32mI (256) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (256) boot: Disabling RNG early entropy source...[0m
+[0;32mI (267) cpu_start: Multicore app[0m
+[0;32mI (277) cpu_start: Pro cpu start user code[0m
+[0;32mI (277) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (277) cpu_start: Application information:[0m
+[0;32mI (280) cpu_start: Project name:     i2c-simple[0m
+[0;32mI (285) cpu_start: App version:      94e5d27[0m
+[0;32mI (290) cpu_start: Compile time:     Apr 20 2024 16:06:18[0m
+[0;32mI (296) cpu_start: ELF file SHA256:  46de614c5...[0m
+[0;32mI (301) cpu_start: ESP-IDF:          v5.2[0m
+[0;32mI (306) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (311) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (316) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (320) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (328) heap_init: At 3FC978D8 len 00051E38 (327 KiB): RAM[0m
+[0;32mI (334) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (340) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (346) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;33mW (353) spi_flash: Octal flash chip is using but dio mode is selected, will automatically swich to Octal mode[0m
+[0;32mI (363) spi_flash: detected chip: mxic (opi)[0m
+[0;32mI (368) spi_flash: flash io: opi_str[0m
+[0;33mW (372) spi_flash: Detected size(32768k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (385) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (403) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (410) main_task: Started on CPU0[0m
+[0;32mI (420) main_task: Calling app_main()[0m
+[0;32mI (420) HTTP_CLIENT: I2C initialized successfully[0m
+
+***ERROR*** A stack overflow in task main has been detected.
+
+
+Backtrace: 0x403759fa:0x3fc9aaa0 0x4037ae6d:0x3fc9aac0 0x4037bd32:0x3fc9aae0 0x4037ce97:0x3fc9ab60 0x4037bdf8:0x3fc9ab80 0x4037bdee:0x00000001 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 46de614c5
+
+Rebooting...
+���ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375970
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (37) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (38) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (38) boot: Multicore bootloader[0m
+[0;32mI (41) boot: chip revision: v0.1[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (59) boot: Enabling RNG early entropy source...[0m
+[0;32mI (65) boot: Partition Table:[0m
+[0;32mI (68) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (83) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (98) boot: End of partition table[0m
+[0;32mI (102) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (145) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m
+[0;32mI (246) esp_image: segment 4: paddr=00095d3c vaddr=40380de0 size=02850h ( 10320) load[0m
+[0;32mI (256) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (256) boot: Disabling RNG early entropy source...[0m
+[0;32mI (267) cpu_start: Multicore app[0m
+[0;32mI (277) cpu_start: Pro cpu start user code[0m
+[0;32mI (277) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (277) cpu_start: Application information:[0m
+[0;32mI (280) cpu_start: Project name:     i2c-simple[0m
+[0;32mI (285) cpu_start: App version:      94e5d27[0m
+[0;32mI (290) cpu_start: Compile time:     Apr 20 2024 16:06:18[0m
+[0;32mI (296) cpu_start: ELF file SHA256:  46de614c5...[0m
+[0;32mI (301) cpu_start: ESP-IDF:          v5.2[0m
+[0;32mI (306) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (311) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (316) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (320) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (328) heap_init: At 3FC978D8 len 00051E38 (327 KiB): RAM[0m
+[0;32mI (334) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (340) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (346) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;33mW (353) spi_flash: Octal flash chip is using but dio mode is selected, will automatically swich to Octal mode[0m
+[0;32mI (363) spi_flash: detected chip: mxic (opi)[0m
+[0;32mI (368) spi_flash: flash io: opi_str[0m
+[0;33mW (372) spi_flash: Detected size(32768k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (385) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (403) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (410) main_task: Started on CPU0[0m
+[0;32mI (420) main_task: Calling app_main()[0m
+[0;32mI (420) HTTP_CLIENT: I2C initialized successfully[0m
+
+***ERROR*** A stack overflow in task main has been detected.
+
+
+Backtrace: 0x403759fa:0x3fc9aaa0 0x4037ae6d:0x3fc9aac0 0x4037bd32:0x3fc9aae0 0x4037ce97:0x3fc9ab60 0x4037bdf8:0x3fc9ab80 0x4037bdee:0x00000001 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 46de614c5
+
+Rebooting...
+���ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375970
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (37) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (38) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (38) boot: Multicore bootloader[0m
+[0;32mI (41) boot: chip revision: v0.1[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (59) boot: Enabling RNG early entropy source...[0m
+[0;32mI (65) boot: Partition Table:[0m
+[0;32mI (68) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (83) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (98) boot: End of partition table[0m
+[0;32mI (102) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (145) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m
+[0;32mI (246) esp_image: segment 4: paddr=00095d3c vaddr=40380de0 size=02850h ( 10320) load[0m
+[0;32mI (256) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (256) boot: Disabling RNG early entropy source...[0m
+[0;32mI (267) cpu_start: Multicore app[0m
+[0;32mI (277) cpu_start: Pro cpu start user code[0m
+[0;32mI (277) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (277) cpu_start: Application information:[0m
+[0;32mI (280) cpu_start: Project name:     i2c-simple[0m
+[0;32mI (285) cpu_start: App version:      94e5d27[0m
+[0;32mI (290) cpu_start: Compile time:     Apr 20 2024 16:06:18[0m
+[0;32mI (296) cpu_start: ELF file SHA256:  46de614c5...[0m
+[0;32mI (301) cpu_start: ESP-IDF:          v5.2[0m
+[0;32mI (306) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (311) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (316) cpu_start: Chip rev:         v0.1[0m
+[0;32mI (320) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (328) heap_init: At 3FC978D8 len 00051E38 (327 KiB): RAM[0m
+[0;32mI (334) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (340) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (346) heap_init: At 600FE010 len 00001FD8 (7 KiB): RTCRAM[0m
+[0;33mW (353) spi_flash: Octal flash chip is using but dio mode is selected, will automatically swich to Octal mode[0m
+[0;32mI (363) spi_flash: detected chip: mxic (opi)[0m
+[0;32mI (368) spi_flash: flash io: opi_str[0m
+[0;33mW (372) spi_flash: Detected size(32768k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (385) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (396) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (403) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (410) main_task: Started on CPU0[0m
+[0;32mI (420) main_task: Calling app_main()[0m
+[0;32mI (420) HTTP_CLIENT: I2C initialized successfully[0m
+
+***ERROR*** A stack overflow in task main has been detected.
+
+
+Backtrace: 0x403759fa:0x3fc9aaa0 0x4037ae6d:0x3fc9aac0 0x4037bd32:0x3fc9aae0 0x4037ce97:0x3fc9ab60 0x4037bdf8:0x3fc9ab80 0x4037bdee:0x00000001 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 46de614c5
+
+Rebooting...
+���ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40375970
+SPIWP:0xee
+Octal Flash Mode Enabled
+For OPI Flash, Use Default Flash Boot Mode
+mode:SLOW_RD, clock div:1
+load:0x3fce3810,len:0x178c
+load:0x403c9700,len:0x4
+load:0x403c9704,len:0xcbc
+load:0x403cc700,len:0x2d98
+entry 0x403c9914
+[0;32mI (37) boot: ESP-IDF v5.2 2nd stage bootloader[0m
+[0;32mI (38) boot: compile time Apr 20 2024 16:06:25[0m
+[0;32mI (38) boot: Multicore bootloader[0m
+[0;32mI (41) boot: chip revision: v0.1[0m
+[0;32mI (44) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (49) boot.esp32s3: SPI Mode       : SLOW READ[0m
+[0;32mI (54) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (59) boot: Enabling RNG early entropy source...[0m
+[0;32mI (65) boot: Partition Table:[0m
+[0;32mI (68) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (75) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (83) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (90) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (98) boot: End of partition table[0m
+[0;32mI (102) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=2077ch (132988) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=000307a4 vaddr=3fc93700 size=02a8ch ( 10892) load[0m
+[0;32mI (145) esp_image: segment 2: paddr=00033238 vaddr=40374000 size=0cde0h ( 52704) load[0m
+[0;32mI (162) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=55d14h (351508) map[0m

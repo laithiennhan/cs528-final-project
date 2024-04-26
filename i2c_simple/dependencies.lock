@@ -1,0 +1,21 @@
+dependencies:
+  espressif/mpu6050:
+    component_hash: d69219ccb141372b863c511749ffbeab28417ac71c205d7ed7030c308e1b6832
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 1.2.0
+  idf:
+    component_hash: null
+    source:
+      type: idf
+    version: 5.2.0
+  parabuzzle/http_rest_client:
+    component_hash: e5235176e536c6b552ddcad0547bcff11aee81cef25e18ede92221f1a0451068
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 0.1.4
+manifest_hash: 536c413319ea14456e174e3c54a9b6ed9bb57510402ce539c76322e42bdcb71e
+target: esp32s3
+version: 1.0.0
