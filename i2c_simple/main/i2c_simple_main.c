@@ -1,30 +1,10 @@
 #include <stdio.h>
 #include <inttypes.h>
 #include "esp_log.h"
-#include "esp_log.h"
 #include "driver/i2c.h"
 #include "mpu6050.h"
 #include <time.h>
-#include "esp_wifi.h"
-#include "esp_netif.h"
-#include <string.h>
-#include <sys/param.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include "esp_log.h"
-#include "nvs_flash.h"
-#include "esp_event.h"
-#include "esp_netif.h"
-#include "esp_tls.h"
-#if CONFIG_MBEDTLS_CERTIFICATE_BUNDLE
-#include "esp_crt_bundle.h"
-#endif
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp_system.h"
-
-#include "esp_http_client.h"
 
 
 // static const char *TAG = "i2c-simple-example";
