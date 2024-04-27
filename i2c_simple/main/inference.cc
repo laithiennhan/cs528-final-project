@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-
 #include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/micro/system_setup.h"
@@ -23,104 +22,131 @@ limitations under the License.
 #include "inference.h"
 #include "model.h"
 #include "output_handler.h"
+#include <iostream>
+#include <cstdlib> // For rand() function
+#include <ctime>   // For time() function
 
 // Globals, used for compatibility with Arduino-style sketches.
-namespace {
-const tflite::Model* model = nullptr;
-tflite::MicroInterpreter* interpreter = nullptr;
-TfLiteTensor* input = nullptr;
-TfLiteTensor* output = nullptr;
-int inference_count = 100;
+namespace
+{
+  const tflite::Model *model = nullptr;
+  tflite::MicroInterpreter *interpreter = nullptr;
+  TfLiteTensor *input = nullptr;
+  TfLiteTensor *output = nullptr;
+  int inference_count = 100;
 
-constexpr int kTensorArenaSize = 2000;
-uint8_t tensor_arena[kTensorArenaSize];
-}  // namespace
-
-// The name of this function is important for Arduino compatibility.
-extern "C"{
-    void setup() {
-  // Map the model into a usable data structure. This doesn't involve any
-  // copying or parsing, it's a very lightweight operation.
-  model = tflite::GetModel(model_tflite);
-  if (model->version() != TFLITE_SCHEMA_VERSION) {
-    MicroPrintf("Model provided is schema version %d not equal to supported "
-                "version %d.", model->version(), TFLITE_SCHEMA_VERSION);
-    return;
-  }
-
-  static tflite::MicroMutableOpResolver<3> resolver;
-  resolver.AddFullyConnected();
-  resolver.AddSoftmax();
-  resolver.AddReshape();
-
-
-  // Build an interpreter to run the model with.
-  static tflite::MicroInterpreter static_interpreter(
-      model, resolver, tensor_arena, kTensorArenaSize);
-  interpreter = &static_interpreter;
-
-  // Allocate memory from the tensor_arena for the model's tensors.
-  TfLiteStatus allocate_status = interpreter->AllocateTensors();
-  if (allocate_status != kTfLiteOk) {
-    MicroPrintf("AllocateTensors() failed");
-    return;
-  }
-
-  // Obtain pointers to the model's input and output tensors.
-  input = interpreter->input(0);
-  output = interpreter->output(0);
-
-  // Keep track of how many inferences we have performed.
-  inference_count = 0;
-}
+  constexpr int kTensorArenaSize = 2000;
+  uint8_t tensor_arena[kTensorArenaSize];
+} // namespace
 
 // The name of this function is important for Arduino compatibility.
-void loop() {
-  // Calculate an x value to feed into the model. We compare the current
-  // inference_count to the number of inferences per cycle to determine
-  // our position within the range of possible x values the model was
-  // trained on, and use this to calculate a value.
-  const int kInferencesPerCycle = 20;
-  inference_count = 100;
-  const float kXrange = 2.f * 3.14159265359f;
-  float position = static_cast<int>(inference_count) /
-                   static_cast<int>(kInferencesPerCycle);
-  float x = position * kXrange;
+extern "C"
+{
+  void setup()
+  {
+    // Map the model into a usable data structure. This doesn't involve any
+    // copying or parsing, it's a very lightweight operation.
+    model = tflite::GetModel(model_tflite);
+    if (model->version() != TFLITE_SCHEMA_VERSION)
+    {
+      MicroPrintf("Model provided is schema version %d not equal to supported "
+                  "version %d.",
+                  model->version(), TFLITE_SCHEMA_VERSION);
+      return;
+    }
 
-  printf("inf_count: %d\n", inference_count);
+    static tflite::MicroMutableOpResolver<4> resolver;
+    resolver.AddFullyConnected();
+    resolver.AddSoftmax();
+    resolver.AddReshape();
+    resolver.AddRelu();
 
-  // Quantize the input from floating-point to integer
-  int8_t x_quantized = x / input->params.scale + input->params.zero_point;
-  // Place the quantized input in the model's input tensor
-  input->data.int8[0] = x_quantized;
+    // Build an interpreter to run the model with.
+    static tflite::MicroInterpreter static_interpreter(
+        model, resolver, tensor_arena, kTensorArenaSize);
+    interpreter = &static_interpreter;
 
-  // Run inference, and report any error
-  TfLiteStatus invoke_status = interpreter->Invoke();
-  if (invoke_status != kTfLiteOk) {
-    MicroPrintf("Invoke failed on x: %f\n",
-                         static_cast<double>(x));
-    return;
+    // Allocate memory from the tensor_arena for the model's tensors.
+    TfLiteStatus allocate_status = interpreter->AllocateTensors();
+    if (allocate_status != kTfLiteOk)
+    {
+      MicroPrintf("AllocateTensors() failed");
+      return;
+    }
+
+    // Obtain pointers to the model's input and output tensors.
+    input = interpreter->input(0);
+    output = interpreter->output(0);
+
+    
+
+
+    // Keep track of how many inferences we have performed.
+    inference_count = 0;
   }
 
-  // Obtain the quantized output from model's output tensor
-  int8_t y_quantized = output->data.int8[0];
-  // Dequantize the output from integer to floating-point
-  float y = (y_quantized - output->params.zero_point) * output->params.scale;
+  // The name of this function is important for Arduino compatibility.
+  void loop()
+  {
+    // Calculate an x value to feed into the model. We compare the current
+    // inference_count to the number of inferences per cycle to determine
+    // our position within the range of possible x values the model was
+    // trained on, and use this to calculate a value.
+    const int kInferencesPerCycle = 20;
+    inference_count = 100;
+    const float kXrange = 2.f * 3.14159265359f;
+    float position = static_cast<int>(inference_count) /
+                     static_cast<int>(kInferencesPerCycle);
+    float x = position * kXrange;
+    
+    float fallData[20][6];
+    
+    for (int i = 0; i < 20; ++i)
+    {
+      for (int j = 0; j < 3; ++j)
+      {
+        fallData[i][j] = static_cast<float>(rand() % 21 - 10);
+      }
 
+      // Generating random gyroscope values in the range [-5, 5]
+      for (int j = 3; j < 6; ++j)
+      {
+        fallData[i][j] = static_cast<float>(rand() % 11 - 5);
+      }
+    }
+    // // Quantize the input from floating-point to integer
+    // int8_t x_quantized = x / input->params.scale + input->params.zero_point;
+    // // Place the quantized input in the model's input tensor
+    // input->data.int8[0] = x_quantized;
+    for(int i = 0 ; i < 20 ; ++i){
+      for(int j = 0; j < 6; ++j){
+        input->data.int8[i * 20 + j] = fallData[i][j];
+        
+      }
+    }
+    
 
-  MicroPrintf("kInferencesPerCycle: %d\n", kInferencesPerCycle);
-  MicroPrintf("position: %d\n", position);
-  MicroPrintf("x_value: %f\n", x);
-  MicroPrintf("y_value: %f\n", y);
+    // Run inference, and report any error
+    TfLiteStatus invoke_status = interpreter->Invoke();
+    if (invoke_status != kTfLiteOk)
+    {
+      MicroPrintf("Invoke failed on x: %f\n",
+                  static_cast<double>(x));
+      return;
+    }
+    MicroPrintf("y_value: %f", static_cast<double>(output->data.int8[0]));
+    // Get the input tensor shape
+    int input_height = input->dims->data[1];
+    int input_width = input->dims->data[2];
+    int input_channels = input->dims->data[3];
 
-  // Output the results. A custom HandleOutput function can be implemented
-  // for each supported hardware target.
-  HandleOutput(x, y);
+    int output_height = output->dims->data[1];
+    int output_width = output->dims->data[2];
+    int output_channels = output->dims->data[3];
 
-  // Increment the inference_counter, and reset it if we have reached
-  // the total number per cycle
-  inference_count += 1;
-  if (inference_count >= kInferencesPerCycle) inference_count = 0;
-}
-   
+    std::cout << "Input shape: " << input_height << "x" << input_width << "x" << input_channels << std::endl;
+    std::cout << "Onput shape: " << output_height << "x" << output_width << "x" << output_channels << std::endl;
+
+    
+  }
 }
