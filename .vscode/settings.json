@@ -57,6 +57,22 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "mpu6050.h": "c"
+    "mpu6050.h": "c",
+    "ostream": "cpp",
+    "__config": "cpp",
+    "__hash_table": "cpp",
+    "__locale": "cpp",
+    "array": "cpp",
+    "functional": "cpp",
+    "iomanip": "cpp",
+    "ios": "cpp",
+    "iterator": "cpp",
+    "locale": "cpp",
+    "span": "cpp",
+    "sstream": "cpp",
+    "string": "cpp",
+    "string_view": "cpp",
+    "type_traits": "cpp",
+    "vector": "cpp"
   }
 }

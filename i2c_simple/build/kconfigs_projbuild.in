@@ -1,8 +1,0 @@
-source "/Users/hieunguyen/esp/esp-idf/components/bootloader/Kconfig.projbuild"
-source "/Users/hieunguyen/esp/esp-idf/components/esp_app_format/Kconfig.projbuild"
-source "/Users/hieunguyen/esp/esp-idf/components/esp_rom/Kconfig.projbuild"
-source "/Users/hieunguyen/esp/esp-idf/components/esptool_py/Kconfig.projbuild"
-source "/Users/hieunguyen/esp/esp-idf/components/partition_table/Kconfig.projbuild"
-source "/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/main/Kconfig.projbuild"
-source "/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/managed_components/espressif__esp-nn/Kconfig.projbuild"
-source "/Users/hieunguyen/Desktop/cs528-final-project/i2c_simple/managed_components/parabuzzle__http_rest_client/Kconfig.projbuild"
