@@ -11,3 +11,7 @@ dependencies.lock
 *.swp
 *.out
 *.lock
+.venv
+.cache
+.DS_Store
+
