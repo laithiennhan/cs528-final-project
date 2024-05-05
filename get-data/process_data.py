@@ -1,6 +1,6 @@
 import re
 
-TAG = "hw2-mpu6050:"
+TAG = "final-project"
 ansi_escape = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
 
 
