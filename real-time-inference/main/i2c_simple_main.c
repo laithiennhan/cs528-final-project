@@ -58,27 +58,39 @@ void app_main(void)
     printf("Device id: %X\n", mpu6050_deviceid);
 
     setup();
-    loop();
+    
+    int count[7];
+    for(int i = 0; i < 7; i++) {
+        count[i] = 0; 
+    }
 
-    // for (int i = 0; i < 20; i++)
-    // {
-    //     time_t start_time = time(NULL);
-    //     while (difftime(time(NULL), start_time) < 4)
-    //     {
-    //         mpu6050_acce_value_t acce;
-    //         mpu6050_gyro_value_t gyro;
+    for (int i = 0; i < 20; i++)
+    {
+        mpu6050_acce_value_t acce;
+        mpu6050_gyro_value_t gyro;
+        mpu6050_get_acce(mpu6050, &acce);
+        mpu6050_get_gyro(mpu6050, &gyro);
 
-    //         mpu6050_get_acce(mpu6050, &acce);
-    //         mpu6050_get_gyro(mpu6050, &gyro);
-            
-            
+        printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n", acce.acce_x, acce.acce_y, acce.acce_z, gyro.gyro_x, gyro.gyro_y, gyro.gyro_z);
+        printf("xxx\n");
+        
+        float inputs[6];
+        inputs[0] = acce.acce_x;
+        inputs[1] = acce.acce_y;
+        inputs[2] = acce.acce_z;
+        inputs[3] = gyro.gyro_x;
+        inputs[4] = gyro.gyro_y;
+        inputs[5] = gyro.gyro_z;
+        int argmax = infer(inputs);
+        count[argmax] ++;
 
-    //         printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n", acce.acce_x, acce.acce_y, acce.acce_z, gyro.gyro_x, gyro.gyro_y, gyro.gyro_z);
-    //         sleep(0.5);
-    //     }
-    //     printf("xxx\n");
-    //     sleep(2);
-    // }
+        printf("Argmax: %d\n", argmax);
+        printf("xxx\n");
+    }
+    
+    for(int i = 0; i < 7; i++){
+        printf("Lable Count: %d\n", count[i]);
+    }
     
     mpu6050_delete(mpu6050);
     i2c_driver_delete(I2C_MASTER_NUM);

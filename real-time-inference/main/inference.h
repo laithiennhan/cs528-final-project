@@ -4,7 +4,7 @@ extern "C" {
 #endif
 
 void setup();
-void loop();
+int infer(float * inputs);
 
 #ifdef __cplusplus
 }

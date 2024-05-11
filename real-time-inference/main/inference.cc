@@ -109,7 +109,7 @@ extern "C"
   }
 
   // The name of this function is important for Arduino compatibility.
-  void loop()
+  int infer(float * inputs)
   {
     // Calculate an x value to feed into the model. We compare the current
     // inference_count to the number of inferences per cycle to determine
@@ -146,35 +146,12 @@ extern "C"
         {0.14, -0.73, -3.03, 2.73, 3.03, 1.97}};
     float randomFallData[20][6];
     
-    for (int i = 0; i < 20; ++i)
-    {
-      for (int j = 0; j < 3; ++j)
-      {
-        randomFallData[i][j] = static_cast<float>(rand() % 21 - 10);
-      }
-
-      // Generating random gyroscope values in the range [-5, 5]
-      for (int j = 3; j < 6; ++j)
-      {
-        randomFallData[i][j] = static_cast<float>(rand() % 11 - 5);
-      }
-    }
+    
 
     std::cout << "Type: " << input->type << std::endl;
 
-
-    // for (int i = 0; i < 20; ++i)
-    // {
-    //   for (int j = 0; j < 6; ++j)
-    //   {
-    //     input->data.f[i * 20 + j] = data[i][j];
-    //   }
-    // };
-
-    for(int i = 0 ; i < 20 ; ++i){
-      for(int j = 0; j < 6; ++ j){
-        input->data.f[i] = data[i][j];
-      }
+    for(int i = 0; i < 6; ++i){
+      input->data.f[i] = inputs[i];
     }
 
     // Run inference, and report any error
@@ -183,38 +160,39 @@ extern "C"
     {
       MicroPrintf("Invoke failed on x: %f\n",
                   static_cast<double>(x));
-      return;
+      return -1;
     }
 
-    int counts[6] = {0};
+    int argmax = 0;
+    int value = output->data.f[0];
 
-    
+    for(int i = 0; i < 7; i++){
+      std:: cout << "Value : " << output->data.f[i] << std::endl;
+      if(value < output->data.f[i]){
+        argmax = i;
+        value = output->data.f[i];
+      }
+    }
     
     std:: cout << "Type : " << output->type << std::endl;
-    std:: cout << output->data.f[0] << std::endl;
-    std:: cout << "Value : " << output->data.f[0] << std::endl;
-    std:: cout << "Value : " << output->data.f[1] << std::endl;
-    std:: cout << "Value : " << output->data.f[2] << std::endl;
-    std:: cout << "Value : " << output->data.f[3] << std::endl;
-    std:: cout << "Value : " << output->data.f[4] << std::endl;
-    std:: cout << "Value : " << output->data.f[5] << std::endl;
-    std:: cout << "Value : " << output->data.f[6] << std::endl;
-
     std:: cout << "Value : " << output->data.f[0] + output->data.f[1] + output->data.f[2] + output->data.f[3] + output->data.f[4] + output->data.f[5] + output->data.f[6] << std::endl;
+    std:: cout << "Argmax :" << argmax << std::endl;
+
+    return argmax;
 
 
-    // // Get the input tensor shape
-    int input_height = input->dims->data[1];
-    int input_width = input->dims->data[2];
-    int input_channels = input->dims->data[3];
+    // // // Get the input tensor shape
+    // int input_height = input->dims->data[1];
+    // int input_width = input->dims->data[2];
+    // int input_channels = input->dims->data[3];
 
-    int output_height = output->dims->data[1];
-    int output_width = output->dims->data[2];
-    int output_channels = output->dims->data[3];
+    // int output_height = output->dims->data[1];
+    // int output_width = output->dims->data[2];
+    // int output_channels = output->dims->data[3];
 
     
 
-    std::cout << "Input shape: " << input_height << "x" << input_width << "x" << input_channels << std::endl;
-    std::cout << "Onput shape: " << output_height << "x" << output_width << "x" << output_channels << std::endl;
+    // std::cout << "Input shape: " << input_height << "x" << input_width << "x" << input_channels << std::endl;
+    // std::cout << "Onput shape: " << output_height << "x" << output_width << "x" << output_channels << std::endl;
   }
 }
