@@ -96,11 +96,11 @@ extern "C"
 
     int randomshit = output->dims->data[0];
 
-    std::cout << input->dims->size << std::endl;
-    std::cout << output->dims->size << std::endl;
-    std::cout << "Input shape: " << input_height << "x" << input_width << "x" << input_channels << std::endl;
-    std::cout << "Onput shape: " << output_height << "x" << output_width << "x" << output_channels << std::endl;
-    std::cout << randomshit << std::endl;
+    /* std::cout << input->dims->size << std::endl; */
+    /* std::cout << output->dims->size << std::endl; */
+    /* std::cout << "Input shape: " << input_height << "x" << input_width << "x" << input_channels << std::endl; */
+    /* std::cout << "Onput shape: " << output_height << "x" << output_width << "x" << output_channels << std::endl; */
+    /* std::cout << randomshit << std::endl; */
     
     
 
@@ -148,9 +148,9 @@ extern "C"
     
     
 
-    std::cout << "Type: " << input->type << std::endl;
+    /* std::cout << "Type: " << input->type << std::endl; */
 
-    for(int i = 0; i < 6; ++i){
+    for(int i = 0; i < 120; ++i){
       input->data.f[i] = inputs[i];
     }
 
@@ -164,19 +164,17 @@ extern "C"
     }
 
     int argmax = 0;
-    int value = output->data.f[0];
+    float value = output->data.f[0];
 
     for(int i = 0; i < 7; i++){
-      std:: cout << "Value : " << output->data.f[i] << std::endl;
       if(value < output->data.f[i]){
         argmax = i;
         value = output->data.f[i];
       }
     }
     
-    std:: cout << "Type : " << output->type << std::endl;
-    std:: cout << "Value : " << output->data.f[0] + output->data.f[1] + output->data.f[2] + output->data.f[3] + output->data.f[4] + output->data.f[5] + output->data.f[6] << std::endl;
-    std:: cout << "Argmax :" << argmax << std::endl;
+    /* std:: cout << "Value : " << output->data.f[0] + output->data.f[1] + output->data.f[2] + output->data.f[3] + output->data.f[4] + output->data.f[5] + output->data.f[6] << std::endl; */
+    /* std:: cout << "Argmax :" << argmax << std::endl; */
 
     return argmax;
 

@@ -59,38 +59,43 @@ void app_main(void)
 
     setup();
     
-    int count[7];
-    for(int i = 0; i < 7; i++) {
-        count[i] = 0; 
-    }
 
-    for (int i = 0; i < 20; i++)
-    {
-        mpu6050_acce_value_t acce;
-        mpu6050_gyro_value_t gyro;
-        mpu6050_get_acce(mpu6050, &acce);
-        mpu6050_get_gyro(mpu6050, &gyro);
+    float inputs[120];
+    mpu6050_acce_value_t acce;
+    mpu6050_gyro_value_t gyro;
+    int count = 0;
+    while (1) {
+      for (int i = 0; i < 20; i++)
+      {
+          mpu6050_get_acce(mpu6050, &acce);
+          mpu6050_get_gyro(mpu6050, &gyro);
 
-        printf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n", acce.acce_x, acce.acce_y, acce.acce_z, gyro.gyro_x, gyro.gyro_y, gyro.gyro_z);
-        printf("xxx\n");
-        
-        float inputs[6];
-        inputs[0] = acce.acce_x;
-        inputs[1] = acce.acce_y;
-        inputs[2] = acce.acce_z;
-        inputs[3] = gyro.gyro_x;
-        inputs[4] = gyro.gyro_y;
-        inputs[5] = gyro.gyro_z;
-        int argmax = infer(inputs);
-        count[argmax] ++;
+          inputs[i * 6 + 0] = acce.acce_x;
+          inputs[i * 6 + 1] = acce.acce_y;
+          inputs[i * 6 + 2] = acce.acce_z;
+          inputs[i * 6 + 3] = gyro.gyro_x;
+          inputs[i * 6 + 4] = gyro.gyro_y;
+          inputs[i * 6 + 5] = gyro.gyro_z;
+      }
+      
+      int argmax = infer(inputs);
+      if (argmax == 4) {
+        if (++count >= 10) {
+        printf("Falling\n");
+      }
+      } else {
+        count = 0;
+      }
 
-        printf("Argmax: %d\n", argmax);
-        printf("xxx\n");
+      // if (argmax == 4) {
+      //   printf("Falling\n");
+      // } else {
+      //   printf("Not Falling\n");
+      // }
     }
-    
-    for(int i = 0; i < 7; i++){
-        printf("Lable Count: %d\n", count[i]);
-    }
+    // for(int i = 0; i < 7; i++){
+    //     printf("Lable Count: %d\n", count[i]);
+    // }
     
     mpu6050_delete(mpu6050);
     i2c_driver_delete(I2C_MASTER_NUM);
