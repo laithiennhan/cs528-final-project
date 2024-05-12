@@ -81,8 +81,9 @@ void app_main(void)
       int argmax = infer(inputs);
       if (argmax == 4) {
         if (++count >= 10) {
-        printf("Falling\n");
-      }
+          printf("Falling\n");
+          count = 0;  
+        }
       } else {
         count = 0;
       }
