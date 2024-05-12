@@ -81,8 +81,21 @@ void app_main(void)
       int argmax = infer(inputs);
       if (argmax == 4) {
         if (++count >= 10) {
-          printf("Falling\n");
-          count = 0;  
+        
+        time_t curtime;
+
+        time(&curtime);
+         // Convert to local time
+        struct tm *local_time = localtime(&curtime);
+        
+        // Extract hours, minutes, and seconds
+        int hours = local_time->tm_hour;
+        int minutes = local_time->tm_min;
+        int seconds = local_time->tm_sec;
+    
+        printf("%02d:%02d:%02d Falling\n", hours, minutes, seconds);
+
+        count = 0;  
         }
       } else {
         count = 0;

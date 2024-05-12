@@ -111,16 +111,7 @@ extern "C"
   // The name of this function is important for Arduino compatibility.
   int infer(float * inputs)
   {
-    // Calculate an x value to feed into the model. We compare the current
-    // inference_count to the number of inferences per cycle to determine
-    // our position within the range of possible x values the model was
-    // trained on, and use this to calculate a value.
-    const int kInferencesPerCycle = 20;
-    inference_count = 100;
-    const float kXrange = 2.f * 3.14159265359f;
-    float position = static_cast<int>(inference_count) /
-                     static_cast<int>(kInferencesPerCycle);
-    float x = position * kXrange;
+    
 
     
     float data[20][6] = {
@@ -158,8 +149,7 @@ extern "C"
     TfLiteStatus invoke_status = interpreter->Invoke();
     if (invoke_status != kTfLiteOk)
     {
-      MicroPrintf("Invoke failed on x: %f\n",
-                  static_cast<double>(x));
+      MicroPrintf("Invoke failed on x");
       return -1;
     }
 
