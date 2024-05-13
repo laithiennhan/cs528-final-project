@@ -13,7 +13,7 @@
 #define GRAVITY 9.8
 
 // Thresholds as per your description
-#define THRESHOLD_ALPHA 3.5
+#define THRESHOLD_ALPHA 3
 #define THRESHOLD_OMEGA 3
 #define THRESHOLD_ANGLE 60
 
@@ -112,7 +112,8 @@ void app_main(void)
 
       if (delta_alpha >= THRESHOLD_ALPHA && delta_omega >= THRESHOLD_OMEGA && theta >= THRESHOLD_ANGLE)
       {
-        printf("Fall detected! \n");
+        printf("******FALL DETECTED*******\n");
+        printf("****** CONTACT HELP ********* \n");
         // Trigger notification logic here
       } else {
       }
