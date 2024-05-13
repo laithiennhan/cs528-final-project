@@ -6,7 +6,17 @@
 #include "mpu6050.h"
 #include <time.h>
 #include "inference.h"
+#include "math.h"
 
+#define WINDOW_SIZE 40
+#define OVERLAP 20
+#define GRAVITY 9.8
+
+// Thresholds as per your description
+#define THRESHOLD_ALPHA 4.2
+#define THRESHOLD_OMEGA 3
+#define THRESHOLD_ANGLE 60
+#define THRESHOLD_MOTION 9
 
 static const char *TAG = "i2c-simple-example";
 static mpu6050_handle_t mpu6050 = NULL;
@@ -19,99 +29,111 @@ static mpu6050_handle_t mpu6050 = NULL;
 #define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
 #define I2C_MASTER_TIMEOUT_MS 1000
 
-
-
 static esp_err_t i2c_master_init(void)
 {
-    int i2c_master_port = I2C_MASTER_NUM;
+  int i2c_master_port = I2C_MASTER_NUM;
 
-    i2c_config_t conf = {
-        .mode = I2C_MODE_MASTER,
-        .sda_io_num = (gpio_num_t)I2C_MASTER_SDA_IO,
-        .scl_io_num = (gpio_num_t)I2C_MASTER_SCL_IO,
-        .sda_pullup_en = GPIO_PULLUP_ENABLE,
-        .scl_pullup_en = GPIO_PULLUP_ENABLE,
-        .master.clk_speed = I2C_MASTER_FREQ_HZ,
-    };
+  i2c_config_t conf = {
+      .mode = I2C_MODE_MASTER,
+      .sda_io_num = (gpio_num_t)I2C_MASTER_SDA_IO,
+      .scl_io_num = (gpio_num_t)I2C_MASTER_SCL_IO,
+      .sda_pullup_en = GPIO_PULLUP_ENABLE,
+      .scl_pullup_en = GPIO_PULLUP_ENABLE,
+      .master.clk_speed = I2C_MASTER_FREQ_HZ,
+  };
 
-    i2c_param_config(i2c_master_port, &conf);
+  i2c_param_config(i2c_master_port, &conf);
 
-    // return i2c_driver_install(i2c_master_port, conf.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);
-    return i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0);
+  // return i2c_driver_install(i2c_master_port, conf.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);
+  return i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0);
 }
 
 static void i2c_sensor_mpu6050_init(void)
 {
-    i2c_master_init();
-    mpu6050 = mpu6050_create(I2C_MASTER_NUM, MPU6050_I2C_ADDRESS);
-    mpu6050_config(mpu6050, ACCE_FS_4G, GYRO_FS_500DPS);
-    mpu6050_wake_up(mpu6050);
+  i2c_master_init();
+  mpu6050 = mpu6050_create(I2C_MASTER_NUM, MPU6050_I2C_ADDRESS);
+  mpu6050_config(mpu6050, ACCE_FS_4G, GYRO_FS_500DPS);
+  mpu6050_wake_up(mpu6050);
 }
 
 void app_main(void)
 {
-    uint8_t mpu6050_deviceid;
+  uint8_t mpu6050_deviceid;
 
-    i2c_sensor_mpu6050_init();
-    ESP_LOGI(TAG, "I2C initialized successfully");
-    mpu6050_get_deviceid(mpu6050, &mpu6050_deviceid);
-    printf("Device id: %X\n", mpu6050_deviceid);
+  i2c_sensor_mpu6050_init();
+  ESP_LOGI(TAG, "I2C initialized successfully");
+  mpu6050_get_deviceid(mpu6050, &mpu6050_deviceid);
+  printf("Device id: %X\n", mpu6050_deviceid);
 
-    setup();
-    
+  setup();
+  float ax, ay, az, gx, gy, gz;
+  float alpha, omega, theta;
+  float max_alpha = 0, min_alpha = INFINITY;
+  float max_omega = 0, min_omega = INFINITY;
+  int samples_collected = 0;
 
-    float inputs[120];
-    mpu6050_acce_value_t acce;
-    mpu6050_gyro_value_t gyro;
-    int count = 0;
-    while (1) {
-      for (int i = 0; i < 20; i++)
+  mpu6050_acce_value_t acce;
+  mpu6050_gyro_value_t gyro;
+  while (1)
+  {
+    mpu6050_get_acce(mpu6050, &acce);
+    mpu6050_get_gyro(mpu6050, &gyro);
+
+    ax = acce.acce_x;
+    ay = acce.acce_y;
+    az = acce.acce_z;
+    gx = gyro.gyro_x / 65.5;
+    gy = gyro.gyro_y / 65.5;
+    gz = gyro.gyro_z / 65.5;
+
+    // Calculate magnitude of vectors
+    alpha = sqrt(ax * ax + ay * ay + az * az);
+    omega = sqrt(gx * gx + gy * gy + gz * gz);
+    theta = acos(alpha / GRAVITY + 0.000001) * 180 / M_PI; // assuming ay is the vertical component
+
+    // Update max and min over the window
+    if (alpha > max_alpha)
+      max_alpha = alpha;
+    if (alpha < min_alpha)
+      min_alpha = alpha;
+    if (omega > max_omega)
+      max_omega = omega;
+    if (omega < min_omega)
+      min_omega = omega;
+
+    samples_collected++;
+
+    // Check window size and apply thresholds
+    if (samples_collected >= WINDOW_SIZE)
+    {
+      float delta_alpha = max_alpha - min_alpha;
+      float delta_omega = max_omega - min_omega;
+
+      ESP_LOGI(TAG, "Delta Alpha: %f, Delta Omega: %f, Theta: %f", delta_alpha, delta_omega, theta);
+
+      if (delta_alpha >= THRESHOLD_ALPHA && delta_omega >= THRESHOLD_OMEGA && theta >= THRESHOLD_ANGLE)
       {
-          mpu6050_get_acce(mpu6050, &acce);
-          mpu6050_get_gyro(mpu6050, &gyro);
-
-          inputs[i * 6 + 0] = acce.acce_x;
-          inputs[i * 6 + 1] = acce.acce_y;
-          inputs[i * 6 + 2] = acce.acce_z;
-          inputs[i * 6 + 3] = gyro.gyro_x;
-          inputs[i * 6 + 4] = gyro.gyro_y;
-          inputs[i * 6 + 5] = gyro.gyro_z;
-      }
-      
-      int argmax = infer(inputs);
-      if (argmax == 4) {
-        if (++count >= 10) {
-        
-        time_t curtime;
-
-        time(&curtime);
-         // Convert to local time
-        struct tm *local_time = localtime(&curtime);
-        
-        // Extract hours, minutes, and seconds
-        int hours = local_time->tm_hour;
-        int minutes = local_time->tm_min;
-        int seconds = local_time->tm_sec;
-    
-        printf("%02d:%02d:%02d Falling\n", hours, minutes, seconds);
-
-        count = 0;  
-        }
+        ESP_LOGI(TAG, "Fall detected!");
+        // Trigger notification logic here
       } else {
-        count = 0;
+        ESP_LOGI(TAG, "Bro still alive");
       }
 
-      // if (argmax == 4) {
-      //   printf("Falling\n");
-      // } else {
-      //   printf("Not Falling\n");
-      // }
+      // Reset for next window with overlap
+      samples_collected = OVERLAP;
+      max_alpha = 0;
+      min_alpha = INFINITY;
+      max_omega = 0;
+      min_omega = INFINITY;
     }
-    // for(int i = 0; i < 7; i++){
-    //     printf("Lable Count: %d\n", count[i]);
-    // }
-    
-    mpu6050_delete(mpu6050);
-    i2c_driver_delete(I2C_MASTER_NUM);
-    ESP_LOGI(TAG, "I2C de-initialized successfully");
+
+    vTaskDelay(pdMS_TO_TICKS(50)); // Sampling rate about 20 Hz
   }
+  // for(int i = 0; i < 7; i++){
+  //     printf("Lable Count: %d\n", count[i]);
+  // }
+
+  mpu6050_delete(mpu6050);
+  i2c_driver_delete(I2C_MASTER_NUM);
+  ESP_LOGI(TAG, "I2C de-initialized successfully");
+}
