@@ -16,7 +16,6 @@
 #define THRESHOLD_ALPHA 3.5
 #define THRESHOLD_OMEGA 3
 #define THRESHOLD_ANGLE 60
-#define THRESHOLD_MOTION 9
 
 static const char *TAG = "i2c-simple-example";
 static mpu6050_handle_t mpu6050 = NULL;
@@ -89,8 +88,8 @@ void app_main(void)
     // Calculate magnitude of vectors
     alpha = sqrt(ax * ax + ay * ay + az * az);
     omega = sqrt(gx * gx + gy * gy + gz * gz);
-    theta = acos(ay + 0.000001) * 180 / M_PI; // assuming ay is the vertical component
-
+    theta = acos(ay/alpha) * 180 / M_PI; // assuming ay is the vertical component
+    // theta2 = atan2(ax,az) * 180 / M_PI;
     // Update max and min over the window
     if (alpha > max_alpha)
       max_alpha = alpha;
@@ -109,11 +108,11 @@ void app_main(void)
       float delta_alpha = max_alpha - min_alpha;
       float delta_omega = max_omega - min_omega;
 
-      ESP_LOGI(TAG, "Delta Alpha: %f, Delta Omega: %f, Theta: %f", delta_alpha, delta_omega, theta);
+      printf("Delta Alpha: %f, Delta Omega: %f, Theta: %f", delta_alpha, delta_omega, theta);
 
       if (delta_alpha >= THRESHOLD_ALPHA && delta_omega >= THRESHOLD_OMEGA && theta >= THRESHOLD_ANGLE)
       {
-        ESP_LOGI(TAG, "Fall detected!");
+        printf("Fall detected!");
         // Trigger notification logic here
       } else {
       }
