@@ -13,7 +13,7 @@
 #define GRAVITY 9.8
 
 // Thresholds as per your description
-#define THRESHOLD_ALPHA 4.2
+#define THRESHOLD_ALPHA 3.5
 #define THRESHOLD_OMEGA 3
 #define THRESHOLD_ANGLE 60
 #define THRESHOLD_MOTION 9
@@ -89,7 +89,7 @@ void app_main(void)
     // Calculate magnitude of vectors
     alpha = sqrt(ax * ax + ay * ay + az * az);
     omega = sqrt(gx * gx + gy * gy + gz * gz);
-    theta = acos(alpha / GRAVITY + 0.000001) * 180 / M_PI; // assuming ay is the vertical component
+    theta = acos(ay + 0.000001) * 180 / M_PI; // assuming ay is the vertical component
 
     // Update max and min over the window
     if (alpha > max_alpha)
@@ -116,7 +116,6 @@ void app_main(void)
         ESP_LOGI(TAG, "Fall detected!");
         // Trigger notification logic here
       } else {
-        ESP_LOGI(TAG, "Bro still alive");
       }
 
       // Reset for next window with overlap
