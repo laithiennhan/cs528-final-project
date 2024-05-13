@@ -108,11 +108,11 @@ void app_main(void)
       float delta_alpha = max_alpha - min_alpha;
       float delta_omega = max_omega - min_omega;
 
-      printf("Delta Alpha: %f, Delta Omega: %f, Theta: %f", delta_alpha, delta_omega, theta);
+      printf("Delta Alpha: %f, Delta Omega: %f, Theta: %f \n", delta_alpha, delta_omega, theta);
 
       if (delta_alpha >= THRESHOLD_ALPHA && delta_omega >= THRESHOLD_OMEGA && theta >= THRESHOLD_ANGLE)
       {
-        printf("Fall detected!");
+        printf("Fall detected! \n");
         // Trigger notification logic here
       } else {
       }
