@@ -1,135 +1,117 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <inttypes.h>
+#include "esp_log.h"
 #include "driver/i2c.h"
 #include "mpu6050.h"
-#include "posture.h"
 #include <time.h>
 #include "inference.h"
 
 
-// static const char *TAG = "i2c-simple-example";
-// static mpu6050_handle_t mpu6050 = NULL;
+static const char *TAG = "i2c-simple-example";
+static mpu6050_handle_t mpu6050 = NULL;
 
-// #define I2C_MASTER_SCL_IO 1         /*!< GPIO number used for I2C master clock */
-// #define I2C_MASTER_SDA_IO 0         /*!< GPIO number used for I2C master data  */
-// #define I2C_MASTER_NUM 0            /*!< I2C master i2c port number, the number of i2c peripheral interfaces available will depend on the chip */
-// #define I2C_MASTER_FREQ_HZ 400000   /*!< I2C master clock frequency */
-// #define I2C_MASTER_TX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
-// #define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
-// #define I2C_MASTER_TIMEOUT_MS 1000
-
-static const char *TAG = "fall";
-extern FeatureData feature_data;
+#define I2C_MASTER_SCL_IO 1         /*!< GPIO number used for I2C master clock */
+#define I2C_MASTER_SDA_IO 0         /*!< GPIO number used for I2C master data  */
+#define I2C_MASTER_NUM 0            /*!< I2C master i2c port number, the number of i2c peripheral interfaces available will depend on the chip */
+#define I2C_MASTER_FREQ_HZ 400000   /*!< I2C master clock frequency */
+#define I2C_MASTER_TX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
+#define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
+#define I2C_MASTER_TIMEOUT_MS 1000
 
 
 
-// static esp_err_t i2c_master_init(void)
-// {
-//     int i2c_master_port = I2C_MASTER_NUM;
+static esp_err_t i2c_master_init(void)
+{
+    int i2c_master_port = I2C_MASTER_NUM;
 
-//     i2c_config_t conf = {
-//         .mode = I2C_MODE_MASTER,
-//         .sda_io_num = (gpio_num_t)I2C_MASTER_SDA_IO,
-//         .scl_io_num = (gpio_num_t)I2C_MASTER_SCL_IO,
-//         .sda_pullup_en = GPIO_PULLUP_ENABLE,
-//         .scl_pullup_en = GPIO_PULLUP_ENABLE,
-//         .master.clk_speed = I2C_MASTER_FREQ_HZ,
-//     };
+    i2c_config_t conf = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = (gpio_num_t)I2C_MASTER_SDA_IO,
+        .scl_io_num = (gpio_num_t)I2C_MASTER_SCL_IO,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = I2C_MASTER_FREQ_HZ,
+    };
 
-//     i2c_param_config(i2c_master_port, &conf);
+    i2c_param_config(i2c_master_port, &conf);
 
-//     // return i2c_driver_install(i2c_master_port, conf.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);
-//     return i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0);
-// }
+    // return i2c_driver_install(i2c_master_port, conf.mode, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);
+    return i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0);
+}
 
-// static void i2c_sensor_mpu6050_init(void)
-// {
-//     i2c_master_init();
-//     mpu6050 = mpu6050_create(I2C_MASTER_NUM, MPU6050_I2C_ADDRESS);
-//     mpu6050_config(mpu6050, ACCE_FS_4G, GYRO_FS_500DPS);
-//     mpu6050_wake_up(mpu6050);
-// }
+static void i2c_sensor_mpu6050_init(void)
+{
+    i2c_master_init();
+    mpu6050 = mpu6050_create(I2C_MASTER_NUM, MPU6050_I2C_ADDRESS);
+    mpu6050_config(mpu6050, ACCE_FS_4G, GYRO_FS_500DPS);
+    mpu6050_wake_up(mpu6050);
+}
 
 void app_main(void)
 {
-    // uint8_t mpu6050_deviceid;
-
-    // i2c_sensor_mpu6050_init();
-    // ESP_LOGI(TAG, "I2C initialized successfully");
-    // mpu6050_get_deviceid(mpu6050, &mpu6050_deviceid);
-    // printf("Device id: %X\n", mpu6050_deviceid);
+    uint8_t mpu6050_deviceid;
 
     i2c_sensor_mpu6050_init();
-    posture_init();
-    
-    while(1)
-    {
-        i2c_sensor_mpu6050_read();
-        i2c_sensor_mpu6050_judge();
-        if(feature_data.PostureState == POSTURE_FALL)
-        {
-            ESP_LOGI(TAG, "Fall Happening");
-            
-        }
-    }
+    ESP_LOGI(TAG, "I2C initialized successfully");
+    mpu6050_get_deviceid(mpu6050, &mpu6050_deviceid);
+    printf("Device id: %X\n", mpu6050_deviceid);
 
-    // setup();
+    setup();
     
 
-    // float inputs[120];
-    // mpu6050_acce_value_t acce;
-    // mpu6050_gyro_value_t gyro;
-    
-    // int count = 0;
-    // while (1) {
-    //   for (int i = 0; i < 20; i++)
-    //   {
-    //       mpu6050_get_acce(mpu6050, &acce);
-    //       mpu6050_get_gyro(mpu6050, &gyro);
+    float inputs[120];
+    mpu6050_acce_value_t acce;
+    mpu6050_gyro_value_t gyro;
+    int count = 0;
+    while (1) {
+      for (int i = 0; i < 20; i++)
+      {
+          mpu6050_get_acce(mpu6050, &acce);
+          mpu6050_get_gyro(mpu6050, &gyro);
 
-    //       inputs[i * 6 + 0] = acce.acce_x;
-    //       inputs[i * 6 + 1] = acce.acce_y;
-    //       inputs[i * 6 + 2] = acce.acce_z;
-    //       inputs[i * 6 + 3] = gyro.gyro_x;
-    //       inputs[i * 6 + 4] = gyro.gyro_y;
-    //       inputs[i * 6 + 5] = gyro.gyro_z;
-    //   }
+          inputs[i * 6 + 0] = acce.acce_x;
+          inputs[i * 6 + 1] = acce.acce_y;
+          inputs[i * 6 + 2] = acce.acce_z;
+          inputs[i * 6 + 3] = gyro.gyro_x;
+          inputs[i * 6 + 4] = gyro.gyro_y;
+          inputs[i * 6 + 5] = gyro.gyro_z;
+      }
       
-    //   int argmax = infer(inputs);
-    //   if (argmax == 4) {
-    //     if (++count >= 10) {
+      int argmax = infer(inputs);
+      if (argmax == 4) {
+        if (++count >= 10) {
         
-    //     time_t curtime;
+        time_t curtime;
 
-    //     time(&curtime);
-    //      // Convert to local time
-    //     struct tm *local_time = localtime(&curtime);
+        time(&curtime);
+         // Convert to local time
+        struct tm *local_time = localtime(&curtime);
         
-    //     // Extract hours, minutes, and seconds
-    //     int hours = local_time->tm_hour;
-    //     int minutes = local_time->tm_min;
-    //     int seconds = local_time->tm_sec;
+        // Extract hours, minutes, and seconds
+        int hours = local_time->tm_hour;
+        int minutes = local_time->tm_min;
+        int seconds = local_time->tm_sec;
     
-    //     printf("%02d:%02d:%02d Falling\n", hours, minutes, seconds);
+        printf("%02d:%02d:%02d Falling\n", hours, minutes, seconds);
 
-    //     count = 0;  
-    //     }
-    //   } else {
-    //     count = 0;
-    //   }
+        count = 0;  
+        }
+      } else {
+        count = 0;
+      }
 
       // if (argmax == 4) {
       //   printf("Falling\n");
       // } else {
       //   printf("Not Falling\n");
       // }
-    
+    }
     // for(int i = 0; i < 7; i++){
     //     printf("Lable Count: %d\n", count[i]);
     // }
     
-    // mpu6050_delete(mpu6050);
-    // i2c_driver_delete(I2C_MASTER_NUM);
-    // ESP_LOGI(TAG, "I2C de-initialized successfully");
+    mpu6050_delete(mpu6050);
+    i2c_driver_delete(I2C_MASTER_NUM);
+    ESP_LOGI(TAG, "I2C de-initialized successfully");
   }
